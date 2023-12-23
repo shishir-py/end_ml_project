@@ -1,1 +1,1 @@
-# well structured maxhine learning project
+# well structured machine learning project
