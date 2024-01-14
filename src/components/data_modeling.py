@@ -42,28 +42,86 @@ class ModelTrainer:
             )
             
             models = {
-                "Linear regression": LinearRegression(),
-                "Decision Tree" : DecisionTreeRegressor(),
-                "Random Forest" : RandomForestRegressor(),
-                "ADA Boost" : AdaBoostRegressor(),
-                "Gradient Boosting": GradientBoostingRegressor(),
-                "catboost" : CatBoostRegressor(verbose=False),
-                "k neighnnours": KNeighborsRegressor(),
-                "XGboost": XGBRegressor()
+                "LinearRegression": LinearRegression(),
+                "DecisionTreeRegressor" : DecisionTreeRegressor(),
+                "RandomForestRegressor" : RandomForestRegressor(),
+                "AdaBoostRegressor" : AdaBoostRegressor(),
+                "GradientBoostingRegressor": GradientBoostingRegressor(),
+                "CatBoostRegressor" : CatBoostRegressor(verbose=False),
+                "KNeighborsRegressor": KNeighborsRegressor(),
+                "XGBRegressor": XGBRegressor()
             }
+            model_params = {
+            "LinearRegression": {},
+            
+            "DecisionTreeRegressor": {
+            'max_depth': [5, 10, 20],  # Use a list of values for grid search
+            'min_samples_split': [2, 5, 10],
+            'min_samples_leaf': [1, 2, 4]
+            },
+
+            "RandomForestRegressor": {
+                'n_estimators': [50, 100, 200],
+                'max_depth': [None, 5, 10, 20],
+                'min_samples_split': [2, 5, 10],
+                'min_samples_leaf': [1, 2, 4]
+            },
+            
+            "AdaBoostRegressor": {
+                'n_estimators': [50, 100, 200],
+                'learning_rate': [0.01, 0.1, 0.5, 1.0]
+            },
+            
+            "GradientBoostingRegressor": {
+                'n_estimators': [50, 100, 200],
+                'learning_rate': [0.01, 0.1, 0.5, 1.0],
+                'max_depth': [3, 5, 10],
+                'min_samples_split': [2, 5, 10],
+                'min_samples_leaf': [1, 2, 4]
+            },
+            
+            "CatBoostRegressor": {
+                'iterations': [50, 100, 200],
+                'learning_rate': [0.01, 0.1, 0.5, 1.0],
+                'depth': [4, 6, 8, 10]
+            },
+            
+            "KNeighborsRegressor": {
+                'n_neighbors': [3, 5, 10],
+                'weights': ['uniform', 'distance'],
+                'p': [1, 2]
+            },
+            
+            "XGBRegressor": {
+                'n_estimators': [50, 100, 200],
+                'learning_rate': [0.01, 0.1, 0.5, 1.0],
+                'max_depth': [3, 5, 10],
+                'min_child_weight': [1, 3, 5]
+            }
+}
+
             logging.info("Model Evaluation started")    
             
-            model_report: dict = model_evaluation(X_train=X_train, y_train=y_train,X_test=X_test,y_test=y_test, models=models)
-            best_score = max(sorted(model_report.values()))
-            best_model = list(model_report.keys())[list(model_report.values()).index(best_score)]
-            best_model=models[best_model]
+            model_report: dict = model_evaluation(X_train=X_train, y_train=y_train,X_test=X_test,y_test=y_test, models=models,params=model_params)
+            best_model_name = None
+            best_test_score = float('-inf')
+            for model_name, model_data in model_report.items():
+                test_score = model_data['test_score']
+                if test_score > best_test_score:
+                    best_test_score = test_score
+                    best_model_name = model_name
+
+            best_model_info = model_report[best_model_name]['model_info']
             
             save_obj(
-                file_path= self.model_trainer_config.model_trained_path,
-                obj=best_model
+                file_path=self.model_trainer_config.model_trained_path,
+                obj=best_model_info
             )
-            logging.info("Model Evaluation done")
-            logging.info(f"Best model is {best_model} and the r2_score is {best_score}")    
-            print(f"Best model is {best_model} and the r2_score is {best_score}") 
+            logging.info(f"The best model has been saved")
+
+            print(f"\nDetails of the model with the highest R2 test score:")
+            print(f"Model Name: {model_report[best_model_name]['model_info']}")
+ 
+            logging.info("model file saved")
         except Exception as e:
             raise custom_exception(e, sys)
