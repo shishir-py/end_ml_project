@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Analysis</title>
+    <style>
+
+        body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .img {
+            border-radius: 50%;
+            max-width: 100px;
+            height: auto;
+            margin: 20px 0;
+        }
+
+        .button {
+        background-color: #1c87c9;
+        -webkit-border-radius: 60px;
+        border-radius: 60px;
+        border: none;
+        color: #eeeeee;
+        cursor: pointer;
+        display: inline-block;
+        font-family: sans-serif;
+        font-size: 20px;
+        padding: 5px 15px;
+        text-align: center;
+        text-decoration: none;
+      }
+      @keyframes glowing {
+        0% {
+          background-color: #2ba805;
+          box-shadow: 0 0 5px #2ba805;
+        }
+        50% {
+          background-color: #49e819;
+          box-shadow: 0 0 20px #49e819;
+        }
+        100% {
+          background-color: #2ba805;
+          box-shadow: 0 0 5px #2ba805;
+        }
+      }
+      .button {
+        animation: glowing 1300ms infinite;
+      }
+
+        p {
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Student Performance Analysis</h1>
+    </header>
+
+    <div class="container">
+        <img
+        src="{{ url_for('static', filename='images/1.jpg') }}"
+        class="img"
+        />
+        <p>
+            Hello, I am Tara Prasad Pandey, the creator of this project. Welcome to the Student Performance Analysis end-to-end
+            machine learning project. In this project, we explore how students' performance (test scores) is affected by
+            various factors. The goal is to gain valuable insights that can contribute to educational improvements.
+        </p>
+
+        <p>
+            This project involves data analysis, machine learning model development, and the creation of a web
+            application to showcase the findings. The journey of creating this project has been both challenging and
+            rewarding, and I'm excited to share it with you.
+        </p>
+
+        <p>
+            Feel free to test the model and explore the insights we've gained. Click the button below to get started!
+        </p>
+
+        <button onclick="location.href='/predictdata'" class="button">Test Model</button>
+    </div>
+</body>
+
+</html>
