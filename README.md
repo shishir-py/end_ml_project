@@ -8,9 +8,9 @@ This repository contains the code and resources for an end-to-end machine learni
 
 ### 1. Data
 
-- **Raw data:** [Describe where to find raw data]
-- **Processed data:** [Specify where preprocessed data is stored]
-- **Data exploration:** [Mention any notebooks or scripts related to data exploration]
+- **Raw data:**
+- **Processed data:** 
+- **Data exploration:**
 
 ### 2. Notebooks
 
