@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains the code and resources for an end-to-end machine learning project. The goal of this project is to [briefly describe the objective or problem statement].
+This repository contains the code and resources for an end-to-end machine learning project. The goal of this project is to find the optimal solutions with maximum accuracy.
 
 ## Project Structure
 
