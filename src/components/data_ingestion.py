@@ -26,6 +26,8 @@ class DataIngestion:
             df=pd.read_csv("notebook\data\StudentsPerformance.csv")
             # we can chage data sorce by interchaing above script withe rit is from database or other sources
             logging.info('read the dataset as dataframe')
+            df.rename(columns=lambda x: x.replace(" ", "_").replace("/", "_").replace("\\", "_"), inplace=True)
+
             
             os.makedirs(os.path.dirname(self.ingestion_config.raw_data_path), exist_ok=True)
             df.to_csv(self.ingestion_config.raw_data_path, index=False, header=True)

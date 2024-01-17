@@ -31,8 +31,8 @@ class DataTransformation:
         """
         
         try:
-            num_cols=['reading score', 'writing score']
-            cat_cols=['gender', 'race/ethnicity', 'parental level of education', 'lunch','test preparation course']
+            num_cols=['reading_score', 'writing_score']
+            cat_cols=['gender', 'race_ethnicity', 'parental_level_of_education', 'lunch','test_preparation_course']
             
             num_pipeline = Pipeline(
                 steps=[
@@ -71,7 +71,7 @@ class DataTransformation:
             logging.info("Task 2: Obtaining preprocessing object")
             
             preprocessing_obj= self.get_data_transformer()
-            target_col_name="math score"
+            target_col_name="math_score"
             
             input_feature_train_df = train_df.drop(columns=[target_col_name], axis=1)
             target_feature_train_df = train_df[target_col_name]
